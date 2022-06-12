@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import "normalize.css/normalize.css";
+import Script from 'next/script';
 
 import type { AppProps } from "next/app";
 import { useState } from "react";
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
+				<Script src="https://unpkg.com/phosphor-icons"/>
 				<Component {...pageProps} />
 			</Hydrate>
 		</QueryClientProvider>
