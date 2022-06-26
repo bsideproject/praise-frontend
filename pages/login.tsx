@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import Screen from "../components/Screen";
 import styled from "styled-components";
 import Image from 'next/image';
+import axios from "axios";
 
 const LoginView = styled.div`
     display: flex;
@@ -68,6 +69,7 @@ const KakaoLoginButton = styled.button`
 	background: ${props => props.theme.colors.yellow.full};
 `;
 
+
 const LoginPage: NextPage = () => {
 	return (
         <div>
@@ -87,7 +89,7 @@ const LoginPage: NextPage = () => {
                             {`제로웨이스트와 함께하는\n 건강한 지구 만들기`}
                         </div>
                     </div>
-                    <KakaoLoginButton>
+                    <KakaoLoginButton onClick={() => location.assign('/auth/kakao')}>
                         카카오톡으로 시작하기
                     </KakaoLoginButton>
                 </LoginView>
