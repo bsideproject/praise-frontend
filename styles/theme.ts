@@ -24,6 +24,48 @@ export const defaultTheme: DefaultTheme = {
 		secondary10: "#FFCD4E",
 		secondary20: "#FFA63D",
 		alert: "#F74857",
+		green: {
+			tintLight: "#F6FFED",
+			tintDark: "#A6E47A",
+			full: "#52C41A",
+			shadeLight: "#237804",
+			shadeDark: "#092B00",
+		},
+		red: {
+			tintLight: "#FFF1F0",
+			tintDark: "#FF8E8A",
+			full: "#DD1D1D",
+			shadeLight: "#A8071A",
+			shadeDark: "#5C0011",
+		},
+		orange: {
+			tintLight: "#FFF7E6",
+			tintDark: "#FFCB7D",
+			full: "#FA8C16",
+			shadeLight: "#AD4E00",
+			shadeDark: "#612500",
+		},
+		yellow: {
+			tintLight: "#FEFFE6",
+			tintDark: "#FFF87B",
+			full: "#FADB14",
+			shadeLight: "#AD8B00",
+			shadeDark: "#614700",
+		},
+		teal: {
+			tintLight: "#E6FFFB",
+			tintDark: "#72E2D9",
+			full: "#13C2C2",
+			shadeLight: "#006D75",
+			shadeDark: "#002329",
+		},
+		blue: {
+			tintLight: "#E6F7FF",
+			tintDark: "#7DCBFF",
+			full: "#1890FF",
+			shadeLight: "#0050B3",
+			shadeDark: "#002766",
+		}
 	},
 	fonts: {
 		pageHeading: "32px",
