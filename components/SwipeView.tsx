@@ -80,9 +80,8 @@ const SplashViewWrapper = styled.div`
   }
 `;
 
-function SwipeView() {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = imagePaths.length;
+function SwipeView(props: { activeStep: number, setActiveStep: Function, maxSteps: number }) {
+  const {activeStep, setActiveStep, maxSteps} = props;
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);

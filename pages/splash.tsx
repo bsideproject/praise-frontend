@@ -1,33 +1,27 @@
 import type { NextPage } from "next";
-
+import * as React from 'react';
 import styled from "styled-components";
 import Button from "../components/Button";
 import SwipeView from "../components/SwipeView";
-
-const ScreenSize = styled.div`
-	width: 375px;
-	height: 812px;
-`
-
-const Splash = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	color: ${props => props.theme.colors.white};
-	background: ${props => props.theme.colors.gray90};
-	font-family: 'Noto Sans KR', sans-serif;
-`;
+import Screen from "../components/Screen";
 
 
-const Home: NextPage = () => {
+const SplashPage: NextPage = () => {
+	const [activeStep, setActiveStep] = React.useState(0);
+	const maxSteps = 4;
+
 	return (
-	<ScreenSize>
-		<Splash>
-			<SwipeView />
-			<Button>다음</Button>
-		</Splash>
-	</ScreenSize>)
+	<Screen>
+		<SwipeView 
+			activeStep={activeStep}
+			setActiveStep={setActiveStep}
+			maxSteps={maxSteps}
+		/>
+		{ activeStep + 1 === maxSteps 
+			? <Button onClick={() => location.assign("/login")}>시작하기</Button>
+			: <Button onClick={() => setActiveStep(prev => prev + 1)}>다음</Button>
+		}
+	</Screen>)
 };
 
-export default Home;
+export default SplashPage;
