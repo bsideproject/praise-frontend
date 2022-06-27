@@ -16,7 +16,7 @@ app.prepare().then(() => {
   server.use(passport.session());
   
   server.get('/auth', (req, res) => {
-    console.log(req.session);
+    // console.log(req.session);
     const user = req?.session?.passport?.user;
     return user ? res.json(user) : res.send(401);
   });
@@ -27,7 +27,12 @@ app.prepare().then(() => {
     failureRedirect: "/",
   }), (req, res)=>{
     console.log("Login Success!");
-    res.redirect('/');
+    const user = req?.session?.passport?.user;
+    if(user?.jwtToken) {
+      res.redirect('/');
+    } else {
+      res.redirect('/consent');
+    }
   });
   
   server.all('*', (req, res) => {

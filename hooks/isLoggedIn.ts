@@ -12,12 +12,12 @@ const isLoggedIn = () => {
 		return axios
 		.get<{ id: string, jwtToken: string }>('/auth')
 		.then(res => {
-			localStorage.setItem('user', JSON.stringify(res.data));
+			localStorage.setItem('user', JSON.stringify(res.data)); // for saving a token to localStorage from authenicated session
 			axios.defaults.headers.common['Authorization'] = res.data.jwtToken;
 			return res.data.id;
 		})
 		.catch(err => {
-			location.assign('/login'); // go to login page
+			location.assign('/splash'); // go to login page
 		})
 	}
 }

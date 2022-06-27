@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
-import Button from "../components/Button";
 import Screen from "../components/Screen";
 import styled from "styled-components";
 import Image from 'next/image';
-import axios from "axios";
 
 const LoginView = styled.div`
     display: flex;
@@ -16,7 +14,6 @@ const LoginView = styled.div`
     .login-image-wrapper {
         display: flex;
         overflow: hidden;
-        margin-top: 5%;
         width: 100%;
         height: 53%;
         align-items: center;
