@@ -21,3 +21,11 @@ ol,
 li {
 	list-style: none;
 }
+a,
+a:hover,
+a:focus,
+a:active {
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+}
