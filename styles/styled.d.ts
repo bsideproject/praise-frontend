@@ -25,6 +25,48 @@ declare module "styled-components" {
 			secondary10: string;
 			secondary20: string;
 			alert: string;
+			green: {
+				tintLight: string,
+				tintDark: string,
+				full: string,
+				shadeLight: string,
+				shadeDark: string,
+			},
+			red: {
+				tintLight: string,
+				tintDark: string,
+				full: string,
+				shadeLight: string,
+				shadeDark: string,
+			},
+			orange: {
+				tintLight: string,
+				tintDark: string,
+				full: string,
+				shadeLight: string,
+				shadeDark: string,
+			},
+			yellow: {
+				tintLight: string,
+				tintDark: string,
+				full: string,
+				shadeLight: string,
+				shadeDark: string,
+			},
+			teal: {
+				tintLight: string,
+				tintDark: string,
+				full: string,
+				shadeLight: string,
+				shadeDark: string,
+			},
+			blue: {
+				tintLight: string,
+				tintDark: string,
+				full: string,
+				shadeLight: string,
+				shadeDark: string,
+			}
 		};
 		fonts: {
 			pageHeading: string;
