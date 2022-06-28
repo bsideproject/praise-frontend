@@ -12,7 +12,7 @@ const Title = styled.div`
 	font-weight: 500;
 `;
 
-const AvatarSection = styled.div`
+const AvatarSection = styled.section`
 	padding-top: 24px;
 	padding-bottom: 24px;
 	display: flex;
@@ -31,7 +31,7 @@ const MissionCardContainer = styled.div`
 	column-gap: 6px;
 `;
 
-const MissionStatusSection = styled.div`
+const MissionStatusSection = styled.section`
 	padding: 24px 16px 24px 16px;
 	display: flex;
 	row-gap: 16px;
@@ -45,7 +45,7 @@ const SectionTitle = styled.div`
 	font-weight: 500;
 `;
 
-const JoinedMissionSection = styled.div`
+const JoinedMissionSection = styled.section`
 	font-size: 14px;
 	line-height: 21px;
 	font-weight: 500;
@@ -53,7 +53,7 @@ const JoinedMissionSection = styled.div`
 	padding: 18px;
 `;
 
-const MyRewardSection = styled.div`
+const MyRewardSection = styled.section`
 	font-size: 14px;
 	line-height: 21px;
 	font-weight: 500;
