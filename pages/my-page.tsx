@@ -73,6 +73,22 @@ const TextContainer = styled.div`
 	justify-content: center;
 `;
 
+const JoinedMissionSection = styled.div`
+	font-size: 14px;
+	line-height: 21px;
+	font-weight: 500;
+	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
+	padding: 18px;
+`;
+
+const MyRewardSection = styled.div`
+	font-size: 14px;
+	line-height: 21px;
+	font-weight: 500;
+	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
+	padding: 18px;
+`;
+
 function MyPage() {
 	return (
 		<DefaultLayout>
@@ -118,7 +134,8 @@ function MyPage() {
 					</MissionCard>
 				</MissionCardContainer>
 			</MissionStatusSection>
-			Hello
+			<JoinedMissionSection>참여한 인증 보기</JoinedMissionSection>
+			<MyRewardSection>내 리워드 보기</MyRewardSection>
 		</DefaultLayout>
 	);
 }
