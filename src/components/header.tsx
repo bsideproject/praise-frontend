@@ -19,6 +19,7 @@ const Header = styled.div`
 	justify-content: space-between;
 	height: 62px;
 	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
+	padding: 0px 24px 0px 24px;
 `;
 
 export { StickyHeader, Header };
