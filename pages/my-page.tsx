@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Header, StickyHeader } from "../src/components/header";
 import DefaultLayout from "../src/layouts";
 import AvatarImage from "../public/avatar.svg";
+import MissionCard from "../src/components/mission-card";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -38,39 +39,10 @@ const MissionStatusSection = styled.div`
 	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
 `;
 
-const MissionCard = styled.div`
-	border: 1px dashed ${({ theme }) => theme.colors.gray2};
-	border-radius: 10px;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	row-gap: 6px;
-	padding: 12px 0px 8px 0px;
-`;
-
 const SectionTitle = styled.div`
 	font-size: 14px;
 	line-height: 21px;
 	font-weight: 500;
-`;
-
-const Text = styled.div`
-	font-size: 12px;
-`;
-
-const StrongText = styled.span`
-	font-size: 18px;
-	line-height: 27px;
-	font-weight: 700;
-`;
-
-const TextContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 `;
 
 const JoinedMissionSection = styled.div`
@@ -105,33 +77,9 @@ function MyPage() {
 			<MissionStatusSection>
 				<SectionTitle>미션 현황</SectionTitle>
 				<MissionCardContainer>
-					<MissionCard>
-						<Calendar size={32} />
-						<TextContainer>
-							<Text>총 미션</Text>
-							<Text>
-								<StrongText>60</StrongText>개
-							</Text>
-						</TextContainer>
-					</MissionCard>
-					<MissionCard>
-						<Calendar size={32} />
-						<TextContainer>
-							<Text>완료 미션</Text>
-							<Text>
-								<StrongText>24</StrongText>개
-							</Text>
-						</TextContainer>
-					</MissionCard>
-					<MissionCard>
-						<Calendar size={32} />
-						<TextContainer>
-							<Text>미완료 미션</Text>
-							<Text>
-								<StrongText>36</StrongText>개
-							</Text>
-						</TextContainer>
-					</MissionCard>
+					<MissionCard type="TOTAL" number={60} />
+					<MissionCard type="COMPLETED" number={24} />
+					<MissionCard type="UNCOMPLETED" number={36} />
 				</MissionCardContainer>
 			</MissionStatusSection>
 			<JoinedMissionSection>참여한 인증 보기</JoinedMissionSection>
