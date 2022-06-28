@@ -25,11 +25,6 @@ const AvatarName = styled.div`
 	font-weight: 500;
 `;
 
-const StatusSection = styled.div`
-	display: flex;
-	flex-direction: column;
-`;
-
 const MissionCardContainer = styled.div`
 	display: flex;
 	column-gap: 6px;
@@ -91,40 +86,38 @@ function MyPage() {
 				<Image src={AvatarImage} alt="avatar Image" />
 				<AvatarName>김지구</AvatarName>
 			</AvatarSection>
-			<StatusSection>
-				<MissionStatusSection>
-					<SectionTitle>미션 현황</SectionTitle>
-					<MissionCardContainer>
-						<MissionCard>
-							<Calendar size={32} />
-							<TextContainer>
-								<Text>총 미션</Text>
-								<Text>
-									<StrongText>60</StrongText>개
-								</Text>
-							</TextContainer>
-						</MissionCard>
-						<MissionCard>
-							<Calendar size={32} />
-							<TextContainer>
-								<Text>완료 미션</Text>
-								<Text>
-									<StrongText>24</StrongText>개
-								</Text>
-							</TextContainer>
-						</MissionCard>
-						<MissionCard>
-							<Calendar size={32} />
-							<TextContainer>
-								<Text>미완료 미션</Text>
-								<Text>
-									<StrongText>36</StrongText>개
-								</Text>
-							</TextContainer>
-						</MissionCard>
-					</MissionCardContainer>
-				</MissionStatusSection>
-			</StatusSection>
+			<MissionStatusSection>
+				<SectionTitle>미션 현황</SectionTitle>
+				<MissionCardContainer>
+					<MissionCard>
+						<Calendar size={32} />
+						<TextContainer>
+							<Text>총 미션</Text>
+							<Text>
+								<StrongText>60</StrongText>개
+							</Text>
+						</TextContainer>
+					</MissionCard>
+					<MissionCard>
+						<Calendar size={32} />
+						<TextContainer>
+							<Text>완료 미션</Text>
+							<Text>
+								<StrongText>24</StrongText>개
+							</Text>
+						</TextContainer>
+					</MissionCard>
+					<MissionCard>
+						<Calendar size={32} />
+						<TextContainer>
+							<Text>미완료 미션</Text>
+							<Text>
+								<StrongText>36</StrongText>개
+							</Text>
+						</TextContainer>
+					</MissionCard>
+				</MissionCardContainer>
+			</MissionStatusSection>
 			Hello
 		</DefaultLayout>
 	);
