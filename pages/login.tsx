@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Screen from "../components/Screen";
 import styled from "styled-components";
 import Image from 'next/image';
 import { PageContainer } from "../src/layouts";
