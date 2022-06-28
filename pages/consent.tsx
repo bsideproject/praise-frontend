@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 import isLoggedIn from "../hooks/isLoggedIn";
 import CheckboxMessage from "../components/CheckboxMessage";
+import { PageContainer } from "../src/layouts";
 
 const ConsentView = styled.div`
     display: flex;
@@ -14,7 +15,7 @@ const ConsentView = styled.div`
     flex-grow: 1;
     height: 100%;
     
-    padding: 10px 16px;
+    padding: 10px 0px;
 
     .consent-navigation {
         height: 32px;
@@ -56,59 +57,56 @@ const agreementItems = [
 
 const Consent: NextPage = () => {
     const id = isLoggedIn();
-    const [disabled, setDisabled] = useState(true);
     const [agreementList, setAgreementList] = useState<string[]>([]);
     const theme = useTheme();
     
 	return (
-        <div>
-            <Screen>
-                <ConsentView>
-                    <div className="consent-navigation">
-                        <Image
-                            height={32}
-                            width={32}
-                            src={'/image/ArrowLeft.png'}
-                            alt={'/image/ArrowLeft.png'}
-                        />
-                    </div>
-                    <div className="consent-title">
-                        약관 동의
-                    </div>
-                    <CheckboxMessage 
-                        message={"제로라이프 이용약관 전체 동의"} 
-                        checked={agreementList.length === agreementItems.length} 
-                        handleChange={(checked: boolean) => { 
-                            if(checked) setAgreementList(agreementItems.map(a => a.key));
-                            else setAgreementList([]); 
-                        }}
+        <PageContainer>
+            <ConsentView>
+                <div className="consent-navigation">
+                    <Image
+                        height={32}
+                        width={32}
+                        src={'/image/ArrowLeft.png'}
+                        alt={'/image/ArrowLeft.png'}
                     />
-                    <div className="consent-view-divider"/>
-                    {
-                        agreementItems.map(agreementItem => {
-                            return <CheckboxMessage 
-                                message={agreementItem.message}
-                                key={agreementItem.key}
-                                checked={agreementList.includes(agreementItem.key)} 
-                                handleChange={(checked: boolean) => {
-                                    if(checked) setAgreementList(prev => prev.concat(agreementItem.key));
-                                    else setAgreementList(prev => prev.filter(item => item !== agreementItem.key));
-                                }}
-                            />
-                        })
-                    }
-                    <Button 
-                        disabled={!agreementItems.every(item => !item.required || agreementList.includes(item.key))}
-                        className="consent-sign-up-button"
-                        color={theme.colors.white}
-                        background={theme.colors.secondary20}
-                        onClick={() => console.log("회원가입..")}
-                    >
-                        회원 가입
-                    </Button>
-                </ConsentView>
-            </Screen>
-        </div>
+                </div>
+                <div className="consent-title">
+                    약관 동의
+                </div>
+                <CheckboxMessage 
+                    message={"제로라이프 이용약관 전체 동의"} 
+                    checked={agreementList.length === agreementItems.length} 
+                    handleChange={(checked: boolean) => { 
+                        if(checked) setAgreementList(agreementItems.map(a => a.key));
+                        else setAgreementList([]); 
+                    }}
+                />
+                <div className="consent-view-divider"/>
+                {
+                    agreementItems.map(agreementItem => {
+                        return <CheckboxMessage 
+                            message={agreementItem.message}
+                            key={agreementItem.key}
+                            checked={agreementList.includes(agreementItem.key)} 
+                            handleChange={(checked: boolean) => {
+                                if(checked) setAgreementList(prev => prev.concat(agreementItem.key));
+                                else setAgreementList(prev => prev.filter(item => item !== agreementItem.key));
+                            }}
+                        />
+                    })
+                }
+                <Button 
+                    disabled={!agreementItems.every(item => !item.required || agreementList.includes(item.key))}
+                    className="consent-sign-up-button"
+                    color={theme.colors.white}
+                    background={theme.colors.secondary20}
+                    onClick={() => console.log("회원가입..")}
+                >
+                    회원 가입
+                </Button>
+            </ConsentView>
+        </PageContainer>
     )
 };
 

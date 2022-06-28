@@ -5,6 +5,7 @@ import Checkbox from "./Checkbox";
 const CheckboxMessageWrapper = styled.div`
     display: flex;
     align-items: center;
+    color: ${props => props.theme.colors.white};
 
     height: 24px;
 
