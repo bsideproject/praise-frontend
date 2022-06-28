@@ -50,7 +50,9 @@ function MyPage() {
 			<StickyHeader>
 				<Header>
 					<Title>미션 현황</Title>
-					<ShareNetwork size={28} />
+					<Link href="/share">
+						<ShareNetwork size={28} />
+					</Link>
 				</Header>
 			</StickyHeader>
 			<AvatarSection>
