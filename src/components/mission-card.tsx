@@ -39,9 +39,9 @@ const MissionCardContainer = styled.div`
 `;
 
 const MissionIcon: Record<MissionType, ReactNode> = {
-	COMPLETED: <CalendarCheck />,
-	TOTAL: <Calendar />,
-	UNCOMPLETED: <CalendarX />,
+	COMPLETED: <CalendarCheck size={28} />,
+	TOTAL: <Calendar size={28} />,
+	UNCOMPLETED: <CalendarX size={28} />,
 };
 
 function MissionCard({ type, number }: MissionCardProps) {
