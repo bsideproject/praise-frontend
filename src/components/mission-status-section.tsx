@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MissionCard from "./mission-card";
+import MissionCard, { MissionType } from "./mission-card";
 
 const SectionContainer = styled.section`
 	padding: 24px 16px 24px 16px;
@@ -9,7 +9,7 @@ const SectionContainer = styled.section`
 	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
 `;
 
-const MissionCardContainer = styled.div`
+const MissionCardContainer = styled.ul`
 	display: flex;
 	column-gap: 6px;
 `;
@@ -20,14 +20,39 @@ const SectionTitle = styled.div`
 	font-weight: 500;
 `;
 
+const MissionLinks: { name: MissionType; queryParams: string; text: string }[] =
+	[
+		{
+			name: "TOTAL",
+			queryParams: "all",
+			text: "총 미션",
+		},
+		{
+			name: "COMPLETED",
+			queryParams: "completed",
+			text: "완료 미션",
+		},
+		{
+			name: "UNCOMPLETED",
+			queryParams: "uncompleted",
+			text: "미완료 미션",
+		},
+	];
+
 function MissionStatusSection() {
 	return (
 		<SectionContainer>
 			<SectionTitle>미션 현황</SectionTitle>
 			<MissionCardContainer>
-				<MissionCard type="TOTAL" number={60} />
-				<MissionCard type="COMPLETED" number={24} />
-				<MissionCard type="UNCOMPLETED" number={36} />
+				{MissionLinks.map((missionLink) => (
+					<MissionCard
+						key={missionLink.name}
+						type={missionLink.name}
+						text={missionLink.text}
+						queryParams={missionLink.queryParams}
+						number={10}
+					/>
+				))}
 			</MissionCardContainer>
 		</SectionContainer>
 	);

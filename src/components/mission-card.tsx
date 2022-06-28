@@ -1,12 +1,15 @@
+import Link from "next/link";
 import { Calendar, CalendarCheck, CalendarX } from "phosphor-react";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-type MissionType = "TOTAL" | "COMPLETED" | "UNCOMPLETED";
+export type MissionType = "TOTAL" | "COMPLETED" | "UNCOMPLETED";
 
 interface MissionCardProps {
 	type: MissionType;
+	text: string;
 	number: number;
+	queryParams: string;
 }
 
 const Text = styled.div`
@@ -26,10 +29,15 @@ const TextContainer = styled.div`
 	justify-content: center;
 `;
 
-const MissionCardContainer = styled.div`
+const MissionCardContainer = styled.li`
 	border: 1px dashed ${({ theme }) => theme.colors.gray2};
 	border-radius: 10px;
 	flex: 1;
+	padding: 12px 0px 8px 0px;
+	cursor: pointer;
+`;
+
+const ItemContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -44,16 +52,20 @@ const MissionIcon: Record<MissionType, ReactNode> = {
 	UNCOMPLETED: <CalendarX size={28} />,
 };
 
-function MissionCard({ type, number }: MissionCardProps) {
+function MissionCard({ type, number, text, queryParams }: MissionCardProps) {
 	return (
 		<MissionCardContainer>
-			{MissionIcon[type]}
-			<TextContainer>
-				<Text>미완료 미션</Text>
-				<Text>
-					<StrongText>{number}</StrongText>개
-				</Text>
-			</TextContainer>
+			<Link href={{ pathname: "/missions", query: { status: queryParams } }}>
+				<ItemContainer>
+					{MissionIcon[type]}
+					<TextContainer>
+						<Text>{text}</Text>
+						<Text>
+							<StrongText>{number}</StrongText>개
+						</Text>
+					</TextContainer>
+				</ItemContainer>
+			</Link>
 		</MissionCardContainer>
 	);
 }
