@@ -30,6 +30,7 @@ const NavigationItem = styled.li`
 const NavigationText = styled.div`
 	font-size: 8px;
 	line-height: 150%;
+	color: ${(props) => props.theme.colors.gray60};
 `;
 
 const NavLinks = [
@@ -37,19 +38,19 @@ const NavLinks = [
 		name: "DAILY_MISSION",
 		path: "/daily-missions",
 		text: "데일리 미션",
-		icon: <Alarm size={32} />,
+		icon: <Alarm size={32} color="#676570" />,
 	},
 	{
 		name: "MISSION_STATUS",
 		path: "/mission-status",
 		text: "미션 현황",
-		icon: <CalendarCheck size={32} />,
+		icon: <CalendarCheck size={32} color="#676570" />,
 	},
 	{
 		name: "MY_PAGE",
 		path: "/my-page",
 		text: "마이 페이지",
-		icon: <Smiley size={32} />,
+		icon: <Smiley size={32} color="#676570" />,
 	},
 ];
 

@@ -18,6 +18,7 @@ const SectionTitle = styled.div`
 	font-size: 14px;
 	line-height: 21px;
 	font-weight: 500;
+	color: ${(props) => props.theme.colors.white};
 `;
 
 const MissionLinks: { name: MissionType; queryParams: string; text: string }[] =

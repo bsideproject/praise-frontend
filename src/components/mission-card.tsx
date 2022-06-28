@@ -34,6 +34,8 @@ const MissionCardContainer = styled.li`
 	border-radius: 10px;
 	flex: 1;
 	padding: 12px 0px 8px 0px;
+	color: ${(props) => props.theme.colors.white};
+	background-color: rgba(255, 255, 255, 0.15);
 	cursor: pointer;
 `;
 

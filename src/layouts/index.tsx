@@ -6,6 +6,7 @@ const PageContainer = styled.div`
 	padding-left: 16px;
 	padding-right: 16px;
 	min-height: 100vh;
+	background-color: ${(props) => props.theme.colors.background};
 	position: relative;
 	@media screen and (min-width: 768px) {
 		margin: 0 auto;

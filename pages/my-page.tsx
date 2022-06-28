@@ -11,6 +11,7 @@ const Title = styled.div`
 	font-size: 24px;
 	line-height: 150%;
 	font-weight: 500;
+	color: ${(props) => props.theme.colors.white};
 `;
 
 const AvatarSection = styled.section`
@@ -25,6 +26,7 @@ const AvatarSection = styled.section`
 const AvatarName = styled.div`
 	font-size: 20px;
 	font-weight: 500;
+	color: ${(props) => props.theme.colors.white};
 `;
 
 const JoinedMissionSection = styled.section`
@@ -32,6 +34,7 @@ const JoinedMissionSection = styled.section`
 	line-height: 21px;
 	font-weight: 500;
 	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
+	color: ${(props) => props.theme.colors.white};
 	padding: 18px;
 	cursor: pointer;
 `;
@@ -41,6 +44,7 @@ const MyRewardSection = styled.section`
 	line-height: 21px;
 	font-weight: 500;
 	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
+	color: ${(props) => props.theme.colors.white};
 	padding: 18px;
 `;
 
@@ -51,7 +55,7 @@ function MyPage() {
 				<Header>
 					<Title>미션 현황</Title>
 					<Link href="/share">
-						<ShareNetwork size={28} />
+						<ShareNetwork size={28} color="#FFFFFF" />
 					</Link>
 				</Header>
 			</StickyHeader>
