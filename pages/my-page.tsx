@@ -5,6 +5,7 @@ import { Header, StickyHeader } from "../src/components/header";
 import DefaultLayout from "../src/layouts";
 import AvatarImage from "../public/avatar.svg";
 import MissionCard from "../src/components/mission-card";
+import Link from "next/link";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -51,6 +52,7 @@ const JoinedMissionSection = styled.section`
 	font-weight: 500;
 	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
 	padding: 18px;
+	cursor: pointer;
 `;
 
 const MyRewardSection = styled.section`
@@ -82,8 +84,12 @@ function MyPage() {
 					<MissionCard type="UNCOMPLETED" number={36} />
 				</MissionCardContainer>
 			</MissionStatusSection>
-			<JoinedMissionSection>참여한 인증 보기</JoinedMissionSection>
-			<MyRewardSection>내 리워드 보기</MyRewardSection>
+			<JoinedMissionSection>
+				<Link href="/completed">참여한 인증 보기</Link>
+			</JoinedMissionSection>
+			<MyRewardSection>
+				<Link href="my-reward">내 리워드 보기</Link>
+			</MyRewardSection>
 		</DefaultLayout>
 	);
 }
