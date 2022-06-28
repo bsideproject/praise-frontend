@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Screen from "../components/Screen";
 import styled, { useTheme } from "styled-components";
 import Image from 'next/image';
 import { useState } from "react";
@@ -7,6 +6,7 @@ import Button from "../components/Button";
 import isLoggedIn from "../hooks/isLoggedIn";
 import CheckboxMessage from "../components/CheckboxMessage";
 import { PageContainer } from "../src/layouts";
+import BackArrow from "../components/BackArrow";
 
 const ConsentView = styled.div`
     display: flex;
@@ -64,12 +64,7 @@ const Consent: NextPage = () => {
         <PageContainer>
             <ConsentView>
                 <div className="consent-navigation">
-                    <Image
-                        height={32}
-                        width={32}
-                        src={'/image/ArrowLeft.png'}
-                        alt={'/image/ArrowLeft.png'}
-                    />
+                    <BackArrow onClick={() => history.back()}/>
                 </div>
                 <div className="consent-title">
                     약관 동의
