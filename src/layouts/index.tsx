@@ -7,6 +7,7 @@ export const PageContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	font-family: 'Noto Sans KR', sans-serif;
 	background-color: ${(props) => props.theme.colors.background};
 	@media screen and (min-width: 768px) {
 		margin: 0 auto;
