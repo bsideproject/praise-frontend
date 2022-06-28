@@ -24,10 +24,13 @@ const SplashViewWrapper = styled.div`
   max-width: 375;
   flex-grow: 1;
   height: 100%;
+  margin-top: 48px;
   background-color: ${props => props.theme.colors.gray90};
 
   > div:first-of-type {
-		height: 100%;
+    display: flex;
+    flex-direction: column;
+		flex: 1;
 	}
 
 	.react-swipeable-view-container {
@@ -45,6 +48,7 @@ const SplashViewWrapper = styled.div`
     overflow: hidden;
     width: 100%;
     height: 65%;
+    margin-bottom: 64px;
     align-items: center;
     justify-content: center;
   }
@@ -55,8 +59,8 @@ const SplashViewWrapper = styled.div`
     font-weightL 500;
     line-height: 30px;
     height: 150px;
-    margin-left: 21px;
-    margin-right: 21px;
+    margin-left: 5px;
+    margin-right: 5px;
     white-space: pre-line;
   }
 
