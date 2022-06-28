@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { Calendar, ShareNetwork } from "phosphor-react";
+import { ShareNetwork } from "phosphor-react";
 import styled from "styled-components";
 import { Header, StickyHeader } from "../src/components/header";
 import DefaultLayout from "../src/layouts";
 import AvatarImage from "../public/avatar.svg";
-import MissionCard from "../src/components/mission-card";
 import Link from "next/link";
+import MissionStatusSection from "../src/components/mission-status-section";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -24,25 +24,6 @@ const AvatarSection = styled.section`
 
 const AvatarName = styled.div`
 	font-size: 20px;
-	font-weight: 500;
-`;
-
-const MissionCardContainer = styled.div`
-	display: flex;
-	column-gap: 6px;
-`;
-
-const MissionStatusSection = styled.section`
-	padding: 24px 16px 24px 16px;
-	display: flex;
-	row-gap: 16px;
-	flex-direction: column;
-	border-bottom: 1px ${({ theme }) => theme.colors.gray10} solid;
-`;
-
-const SectionTitle = styled.div`
-	font-size: 14px;
-	line-height: 21px;
 	font-weight: 500;
 `;
 
@@ -76,14 +57,7 @@ function MyPage() {
 				<Image src={AvatarImage} alt="avatar Image" />
 				<AvatarName>김지구</AvatarName>
 			</AvatarSection>
-			<MissionStatusSection>
-				<SectionTitle>미션 현황</SectionTitle>
-				<MissionCardContainer>
-					<MissionCard type="TOTAL" number={60} />
-					<MissionCard type="COMPLETED" number={24} />
-					<MissionCard type="UNCOMPLETED" number={36} />
-				</MissionCardContainer>
-			</MissionStatusSection>
+			<MissionStatusSection />
 			<JoinedMissionSection>
 				<Link href="/completed">참여한 인증 보기</Link>
 			</JoinedMissionSection>
