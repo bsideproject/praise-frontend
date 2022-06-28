@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Footer from "../components/footer";
 
-const PageContainer = styled.div`
+export const PageContainer = styled.div`
 	padding-left: 16px;
 	padding-right: 16px;
 	display: flex;
