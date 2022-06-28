@@ -6,11 +6,10 @@ const FooterContainer = styled.div`
 	border-top: 1px ${({ theme }) => theme.colors.gray10} solid;
 	padding-top: 14px;
 	padding-bottom: 14px;
-	width: 100%;
-	height: 51px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	position: sticky;
+	bottom: 0px;
+	z-index: 10;
+	background-color: ${(props) => props.theme.colors.background};
 `;
 
 const NavigationBar = styled.ul`

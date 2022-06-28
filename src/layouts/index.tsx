@@ -1,20 +1,23 @@
-import { Alarm, CalendarCheck, Smiley } from "phosphor-react";
 import styled from "styled-components";
 import Footer from "../components/footer";
 
 const PageContainer = styled.div`
 	padding-left: 16px;
 	padding-right: 16px;
+	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
 	background-color: ${(props) => props.theme.colors.background};
-	position: relative;
 	@media screen and (min-width: 768px) {
 		margin: 0 auto;
 		width: 650px;
 	}
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+	flex: 1 0 auto;
+	margin-bottom: 73px;
+`;
 
 function DefaultLayout({ children }: { children: React.ReactNode }) {
 	return (
