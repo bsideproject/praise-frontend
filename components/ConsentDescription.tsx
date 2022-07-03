@@ -1,5 +1,3 @@
-import { PageContainer } from "../src/layouts";
-import BackArrow from "./BackArrow";
 import { createPortal } from "react-dom";
 import styled, { useTheme } from "styled-components";
 import { ArrowLeft } from "phosphor-react";
@@ -12,11 +10,13 @@ const PageContainerOverlay = styled.div`
     max-width: 100%;
     min-height: 100vh;
     max-height: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
     color: ${props => props.theme.colors.white};
     background-color: ${(props) => props.theme.colors.background};
     z-index: 5000;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 685px) {
 		margin: 0 auto;
 		width: 650px;
 	}

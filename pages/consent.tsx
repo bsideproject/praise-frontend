@@ -15,7 +15,7 @@ const ConsentView = styled.div`
     flex-grow: 1;
     height: 100%;
     
-    padding: 10px 0px;
+    padding: 10px 16px;
 
     .consent-navigation {
         height: 32px;
