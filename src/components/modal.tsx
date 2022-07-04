@@ -69,7 +69,7 @@ function Modal({ show, onBack, children, title }: ModalProps) {
 		<StyledModalOverlay>
 			<StyledModal>
 				<ModalHeader>
-					<ArrowLeft size={28} color="#FFFFFF" onClick={() => handleBack} />
+					<ArrowLeft size={28} color="#FFFFFF" onClick={handleBack} />
 					<Title>{title}</Title>
 				</ModalHeader>
 				<StyledModalBody>{children}</StyledModalBody>
