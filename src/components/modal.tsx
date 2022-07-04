@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const StyledModalBody = styled.div`
 	padding-top: 10px;
+	flex: 1 0 auto;
 `;
 
 const StyledModal = styled.div`
@@ -12,6 +13,8 @@ const StyledModal = styled.div`
 	width: 100%;
 	height: 100%;
 	padding: 0px 16px;
+	display: flex;
+	flex-direction: column;
 `;
 
 const StyledModalOverlay = styled.div`
