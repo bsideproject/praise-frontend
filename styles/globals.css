@@ -29,3 +29,17 @@ a:active {
 	text-decoration: none;
 	color: inherit;
 }
+
+.mobile-container {
+	padding-left: 16px;
+	padding-right: 16px;
+	background-color: #1b1a1f;
+	position: relative;
+}
+
+@media screen and (min-width: 768px) {
+	.mobile-container {
+		margin: 0 auto;
+		width: 650px;
+	}
+}
