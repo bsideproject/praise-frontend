@@ -36,13 +36,12 @@ const StyledCheckbox = styled.div<{ checked: boolean }>`
 interface CheckboxProps {
     className?: string, 
     checked: boolean, 
-    onCLick: React.FormEventHandler<HTMLDivElement>, 
-    checkboxRef: any
+    onClick: React.FormEventHandler<HTMLDivElement>, 
 }
 
-const Checkbox = ({ className, checked, onCLick, checkboxRef } : CheckboxProps) => (
+const Checkbox = ({ className, checked, onClick } : CheckboxProps) => (
   <CheckboxContainer className={className}>
-    <StyledCheckbox checked={checked} onClick={onCLick} ref={checkboxRef}>
+    <StyledCheckbox checked={checked} onClick={onClick}>
       <Icon viewBox="0 0 24 24">
         <polyline points="20 6 9 17 4 12"/>
       </Icon>

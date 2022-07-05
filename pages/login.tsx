@@ -1,14 +1,12 @@
 import type { NextPage } from "next";
-import Screen from "../components/Screen";
 import styled from "styled-components";
 import Image from 'next/image';
+import { PageContainer } from "../src/layouts";
 
 const LoginView = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 375;
     flex-grow: 1;
-    height: 100%;
     background-color: ${props => props.theme.colors.gray90};
 
     .login-image-wrapper {
@@ -16,6 +14,7 @@ const LoginView = styled.div`
         overflow: hidden;
         width: 100%;
         height: 53%;
+        margin-top: 58px;
         align-items: center;
         justify-content: center;
     }
@@ -61,7 +60,7 @@ const KakaoLoginButton = styled.button`
 	font-size: 14px;
 	border-radius: 5px;
     margin-top: auto;
-    margin-bottom: 10%;
+    margin-bottom: 71px;
 	color: ${props => props.theme.colors.gray80};
 	background: ${props => props.theme.colors.yellow.full};
 `;
@@ -69,29 +68,27 @@ const KakaoLoginButton = styled.button`
 
 const LoginPage: NextPage = () => {
 	return (
-        <div>
-            <Screen>
-                <LoginView>
-                    <div className="login-image-wrapper">
-                        <Image
-                            height={300}
-                            width={300}
-                            src={'/image/login/login1.png'}
-                            alt={'/image/login/login1.png'}
-                        />
+        <PageContainer>
+            <LoginView>
+                <div className="login-image-wrapper">
+                    <Image
+                        height={300}
+                        width={300}
+                        src={'/image/login/login1.png'}
+                        alt={'/image/login/login1.png'}
+                    />
+                </div>
+                <div className="login-message">
+                    <div className="login-message-title">제로라이프</div>
+                    <div className="login-message-description">
+                        {`제로웨이스트와 함께하는\n 건강한 지구 만들기`}
                     </div>
-                    <div className="login-message">
-                        <div className="login-message-title">제로라이프</div>
-                        <div className="login-message-description">
-                            {`제로웨이스트와 함께하는\n 건강한 지구 만들기`}
-                        </div>
-                    </div>
-                    <KakaoLoginButton onClick={() => location.assign('/auth/kakao')}>
-                        카카오톡으로 시작하기
-                    </KakaoLoginButton>
-                </LoginView>
-            </Screen>
-        </div>
+                </div>
+                <KakaoLoginButton onClick={() => location.assign('/auth/kakao')}>
+                    카카오톡으로 시작하기
+                </KakaoLoginButton>
+            </LoginView>
+        </PageContainer>
     )
 };
 
