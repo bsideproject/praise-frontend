@@ -60,10 +60,6 @@ function Modal({ show, onBack, children, title }: ModalProps) {
 		setIsBrowser(true);
 	}, []);
 
-	useEffect(() => {
-		setIsBrowser(true);
-	}, []);
-
 	const handleBack = () => {
 		onBack();
 	};
