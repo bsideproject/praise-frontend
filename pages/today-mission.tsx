@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Bell } from "phosphor-react";
 import styled, { useTheme } from "styled-components";
 import { Header, StickyHeader } from "../src/components/header";
@@ -139,7 +140,9 @@ const mission = {
 
 function MyPage() {
 	const theme = useTheme();
-	const [showModal, setShowModal] = useState(false);
+	const [ showNotification, setShowNotification ] = useState(false);
+	const [ showMissionModal, setShowMissionModal ] = useState(false);
+	const [ imageSrc, setImageSrc ] = useState("");
 	const [ remainingTime, setRemainingTime ] = useState("");
 	const iconPath = `/image/today/${mission.type}-${mission.isCompleted ? "completed" : "progress"}.svg`;
 
@@ -155,7 +158,34 @@ function MyPage() {
 	useEffect(() => {
 		updateRemainingTime();
 		setInterval(updateRemainingTime, 1000);
-	}, [])
+
+		function listener(event: any) {
+			const { file } = JSON.parse(event.data);
+			setImageSrc(`data:image/jpg;base64,${file.base64}`);
+			setShowMissionModal(true);
+		};
+
+		if (window.ReactNativeWebView) {
+			/** android */
+			document.addEventListener("message", listener);
+			/** ios */
+			window.addEventListener("message", listener);
+		}
+		return () => {
+			if (window.ReactNativeWebView) {
+				document.removeEventListener("message", listener);
+				window.removeEventListener("message", listener);
+			}
+		}
+	}, []);
+
+	const sendCameraRequest = () => {
+		if (window.ReactNativeWebView) {
+			window.ReactNativeWebView.postMessage(JSON.stringify({ type: "REQ_CAMERA_PERMISSION"}));
+		} else {
+			alert("모바일 환경이 아닙니다.");
+		}
+	}
 	
 	return (
 		<DefaultLayout>
@@ -165,7 +195,7 @@ function MyPage() {
 					<Image
 						src={BellImage}
 						alt="bell Image"
-						onClick={() => setShowModal(true)}
+						onClick={() => setShowNotification(true)}
 					/>
 				</Header>
 			</StickyHeader>
@@ -173,7 +203,7 @@ function MyPage() {
 				<Tooltip>
 					<span className="message">{mission.description}</span>
 				</Tooltip>
-				<Mission>
+				<Mission onClick={sendCameraRequest}>
 					<div className="mission-header">
 						<div className="mission-tag">
 							<span>#{mission.days} 미션</span>
@@ -194,12 +224,19 @@ function MyPage() {
 						/>
 						<div className="mission-upload-button">미션 인증하기</div>
 					</div>
-					
 				</Mission>
 			</Content>
-			<Modal title="알림" onBack={() => setShowModal(false)} show={showModal}>
+			<Modal title="알림" onBack={() => setShowNotification(false)} show={showNotification}>
 				<NotificationSection notifications={MOCK_NOTIFICATIONS} />
 			</Modal>
+			{imageSrc && <Modal title="인증 사진" onBack={() => setShowMissionModal(false)} show={showMissionModal}>
+				<img
+					width={"260px"}	
+					height={"260px"}
+					src={imageSrc}
+					alt={"image of Mission"}
+				/>
+			</Modal>}
 		</DefaultLayout>
 	);
 }
