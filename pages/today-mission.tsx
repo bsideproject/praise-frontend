@@ -5,6 +5,9 @@ import DefaultLayout from "../src/layouts";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import BellImage from "../public/icon/Bell.svg";
+import Modal from "../src/components/modal";
+import NotificationSection from "../src/components/notification-section";
 import { useEffect, useState } from "react";
 
 const Title = styled.div`
@@ -121,18 +124,22 @@ const Mission = styled.div`
 	}
 `;
 
+const MOCK_NOTIFICATIONS = [
+	{ title: "hello", text: "world", createdAt: new Date() },
+];
+
+const mission = {
+	days: 12,
+	title: "비밀봉지 쓰지않기",
+	description: "우리가 일회용으로 받는 비닐봉지는 사실 37회를 사용해야하지만 지구에 건강하다고 해요. 오늘 하루는 비닐봉지를 안 받아보는 건 어때요? 👀",
+	isCompleted: false,
+	type: "Mountain",
+};
 
 
 function MyPage() {
 	const theme = useTheme();
-	
-	const mission = {
-		days: 12,
-		title: "비밀봉지 쓰지않기",
-		description: "우리가 일회용으로 받는 비닐봉지는 사실 37회를 사용해야하지만 지구에 건강하다고 해요. 오늘 하루는 비닐봉지를 안 받아보는 건 어때요? 👀",
-		isCompleted: false,
-		type: "Mountain",
-	};
+	const [showModal, setShowModal] = useState(false);
 	const [ remainingTime, setRemainingTime ] = useState("");
 	const iconPath = `/image/today/${mission.type}-${mission.isCompleted ? "completed" : "progress"}.svg`;
 
@@ -155,9 +162,11 @@ function MyPage() {
 			<StickyHeader>
 				<Header>
 					<Title>오늘의 미션</Title>
-					<Link href="/alarm">
-						<_Bell size={32} color={theme.colors.gray90} />
-					</Link>
+					<Image
+						src={BellImage}
+						alt="bell Image"
+						onClick={() => setShowModal(true)}
+					/>
 				</Header>
 			</StickyHeader>
 			<Content>
@@ -188,6 +197,9 @@ function MyPage() {
 					
 				</Mission>
 			</Content>
+			<Modal title="알림" onBack={() => setShowModal(false)} show={showModal}>
+				<NotificationSection notifications={MOCK_NOTIFICATIONS} />
+			</Modal>
 		</DefaultLayout>
 	);
 }
