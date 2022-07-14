@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { Header, StickyHeader } from "../src/components/header";
-import DefaultLayout from "../src/layouts";
-import Modal from "../src/components/modal";
+import { Header, StickyHeader } from "../components/Header";
+import DefaultLayout from "../layouts";
+import Modal from "../components/PageOverlay";
 import { useState } from "react";
-import BellImage from "../public/bell.svg";
+import BellImage from "../public/icon/Bell.svg";
 import Image from "next/image";
-import NotificationSection from "../src/components/notification-section";
+import NotificationSection from "../components/NotificationSection";
 
 const MOCK_NOTIFICATIONS = [
 	{ title: "hello", text: "world", createdAt: new Date() },

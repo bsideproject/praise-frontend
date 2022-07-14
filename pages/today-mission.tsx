@@ -1,15 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import { Bell } from "phosphor-react";
 import styled, { useTheme } from "styled-components";
-import { Header, StickyHeader } from "../src/components/header";
-import DefaultLayout from "../src/layouts";
+import { Header, StickyHeader } from "../components/Header";
+import DefaultLayout from "../layouts";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 import BellImage from "../public/icon/Bell.svg";
-import Modal from "../src/components/modal";
-import NotificationSection from "../src/components/notification-section";
+import PageOverlay from "../components/PageOverlay";
+import Modal from "../components/Modal";
+import NotificationSection from "../components/NotificationSection";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import MissionCheckModalContent from "../components/MissionCheckModalContent";
+
+const BACKEND_URL = "http://118.67.128.237";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -129,13 +134,20 @@ const MOCK_NOTIFICATIONS = [
 	{ title: "hello", text: "world", createdAt: new Date() },
 ];
 
-const mission = {
-	days: 12,
-	title: "비밀봉지 쓰지않기",
-	description: "우리가 일회용으로 받는 비닐봉지는 사실 37회를 사용해야하지만 지구에 건강하다고 해요. 오늘 하루는 비닐봉지를 안 받아보는 건 어때요? 👀",
-	isCompleted: false,
-	type: "Mountain",
-};
+const dummyMission = {
+	"mission": {
+		"title": "비밀봉지 쓰지않기",
+		"type": "Mountain",
+		"description": "우리가 일회용으로 받는 비닐봉지는 사실 37회를 사용해야하지만 지구에 건강하다고 해요. 오늘 하루는 비닐봉지를 안 받아보는 건 어때요? 👀",
+	},
+	"missionProgress": {
+		"id": 1,
+		"proofImageUrl": "",
+		"isCompleted": false,
+		"createdAt": "",
+	},
+	"daysOfProgress": 12,
+}
 
 
 function MyPage() {
@@ -143,8 +155,11 @@ function MyPage() {
 	const [ showNotification, setShowNotification ] = useState(false);
 	const [ showMissionModal, setShowMissionModal ] = useState(false);
 	const [ imageSrc, setImageSrc ] = useState("");
+	// const [ showMissionModal, setShowMissionModal ] = useState(true);
+	// const [ imageSrc, setImageSrc ] = useState("/image/today/Mountain-completed.svg");
+	const [ mission, setMission ] = useState<{ mission?: any, missionProgress?: any, daysOfProgress?: any}>({});
 	const [ remainingTime, setRemainingTime ] = useState("");
-	const iconPath = `/image/today/${mission.type}-${mission.isCompleted ? "completed" : "progress"}.svg`;
+	const iconPath = `/image/today/${dummyMission.mission.type}-${dummyMission.missionProgress.isCompleted ? "completed" : "progress"}.svg`;
 
 	function updateRemainingTime() {
 		const remainingTime = moment().endOf("day").diff(moment());
@@ -161,6 +176,7 @@ function MyPage() {
 
 		function listener(event: any) {
 			const { file } = JSON.parse(event.data);
+			console.log(file.base64);
 			setImageSrc(`data:image/jpg;base64,${file.base64}`);
 			setShowMissionModal(true);
 		};
@@ -171,6 +187,27 @@ function MyPage() {
 			/** ios */
 			window.addEventListener("message", listener);
 		}
+
+		// axios
+		// 	.get(`${BACKEND_URL}/apis/mission-progress`)
+		// 	.then((response) => {
+		// 		setMission(response.data);
+		// 	})
+		// 	.catch((error) => {
+		// 		if(error.code === "E3000") {
+		// 			axios
+		// 			.post(`${BACKEND_URL}/apis/mission-progress`)
+		// 			.then((data) => {
+		// 				axios
+		// 					.get(`${BACKEND_URL}/apis/mission-progress`)
+		// 					.then((response) => {
+		// 						setMission(response.data);
+		// 					})
+		// 			})
+		// 		}
+		// 	})
+		setMission(dummyMission);
+
 		return () => {
 			if (window.ReactNativeWebView) {
 				document.removeEventListener("message", listener);
@@ -200,17 +237,17 @@ function MyPage() {
 				</Header>
 			</StickyHeader>
 			<Content>
-				<Tooltip>
-					<span className="message">{mission.description}</span>
-				</Tooltip>
-				<Mission onClick={sendCameraRequest}>
+				{mission.mission && <Tooltip>
+					<span className="message">{mission.mission.description}</span>
+				</Tooltip>}
+				{mission.mission && <Mission onClick={sendCameraRequest}>
 					<div className="mission-header">
 						<div className="mission-tag">
-							<span>#{mission.days} 미션</span>
+							<span>#{mission.daysOfProgress} 미션</span>
 						</div>
-						<div className="mission-title">{mission.title}</div>
+						<div className="mission-title">{mission.mission.title}</div>
 						<div className="mission-remaining-time">
-							{mission.isCompleted ?  "미션 수행 완료" : `${remainingTime} 남음`}
+							{mission.missionProgress.isCompleted ?  "미션 수행 완료" : `${remainingTime} 남음`}
 						</div>
 					</div>
 					
@@ -224,19 +261,18 @@ function MyPage() {
 						/>
 						<div className="mission-upload-button">미션 인증하기</div>
 					</div>
-				</Mission>
+				</Mission>}
 			</Content>
-			<Modal title="알림" onBack={() => setShowNotification(false)} show={showNotification}>
+			<PageOverlay title="알림" onBack={() => setShowNotification(false)} show={showNotification}>
 				<NotificationSection notifications={MOCK_NOTIFICATIONS} />
-			</Modal>
-			{imageSrc && <Modal title="인증 사진" onBack={() => setShowMissionModal(false)} show={showMissionModal}>
-				<img
-					width={"260px"}	
-					height={"260px"}
-					src={imageSrc}
-					alt={"image of Mission"}
-				/>
-			</Modal>}
+			</PageOverlay>
+			{imageSrc && 
+				<Modal title="인증 사진" onBack={() => setShowMissionModal(false)} show={showMissionModal}>
+					<MissionCheckModalContent
+						imageSrc={imageSrc}
+					/>
+				</Modal>
+			}
 		</DefaultLayout>
 	);
 }

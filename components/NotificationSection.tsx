@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
-import EmptyNotiImage from "../../public/emptyNoti.svg";
+import EmptyNotiImage from "../public/emptyNoti.svg";
 
 const NotiSectionContainer = styled.div`
 	height: 100%;
