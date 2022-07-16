@@ -159,7 +159,8 @@ function MyPage() {
 	// const [ imageSrc, setImageSrc ] = useState("/image/today/Mountain-completed.svg");
 	const [ mission, setMission ] = useState<{ mission?: any, missionProgress?: any, daysOfProgress?: any}>({});
 	const [ remainingTime, setRemainingTime ] = useState("");
-	const iconPath = `/image/today/${dummyMission.mission.type}-${dummyMission.missionProgress.isCompleted ? "completed" : "progress"}.svg`;
+	const [ iconPath, setIconPath ] = useState("/image/today/defaultIcon.svg");
+	;
 
 	function updateRemainingTime() {
 		const remainingTime = moment().endOf("day").diff(moment());
@@ -188,25 +189,30 @@ function MyPage() {
 			window.addEventListener("message", listener);
 		}
 
-		// axios
-		// 	.get(`${BACKEND_URL}/apis/mission-progress`)
-		// 	.then((response) => {
-		// 		setMission(response.data);
-		// 	})
-		// 	.catch((error) => {
-		// 		if(error.code === "E3000") {
-		// 			axios
-		// 			.post(`${BACKEND_URL}/apis/mission-progress`)
-		// 			.then((data) => {
-		// 				axios
-		// 					.get(`${BACKEND_URL}/apis/mission-progress`)
-		// 					.then((response) => {
-		// 						setMission(response.data);
-		// 					})
-		// 			})
-		// 		}
-		// 	})
-		setMission(dummyMission);
+		axios
+			.get(`${BACKEND_URL}/apis/daily-mission-progress`)
+			.then((response) => {
+				const mission = response.data;
+				setMission(mission);
+				setIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
+			})
+			.catch((err) => {
+				const { error } = err.response.data;
+				if(error.code === "E3000") {
+					axios
+					.post(`${BACKEND_URL}/apis/mission-progress`)
+					.then((data) => {
+						axios
+							.get(`${BACKEND_URL}/apis/daily-mission-progress`)
+							.then((response) => {
+								const mission = response.data;
+								setMission(mission);
+								setIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
+							})
+					})
+				}
+			})
+		// setMission(dummyMission);
 
 		return () => {
 			if (window.ReactNativeWebView) {
@@ -256,6 +262,7 @@ function MyPage() {
 							height={173}
 							width={173}
 							src={iconPath}
+							onError={() => setIconPath("/image/today/defaultIcon.svg")}
 							alt={"icon of Mission"}
 							className="mission-icon"
 						/>
