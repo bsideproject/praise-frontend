@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import styled from "styled-components";
 import Image from 'next/image';
-import { PageContainer } from "../src/layouts";
+import { PageContainer } from "../layouts";
 
 const LoginView = styled.div`
     display: flex;

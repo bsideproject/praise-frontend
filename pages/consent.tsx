@@ -1,12 +1,10 @@
 import type { NextPage } from "next";
 import styled, { useTheme } from "styled-components";
-import Image from 'next/image';
 import { useState } from "react";
 import Button from "../components/Button";
 import isLoggedIn from "../hooks/isLoggedIn";
 import CheckboxMessage from "../components/CheckboxMessage";
-import { PageContainer } from "../src/layouts";
-import BackArrow from "../components/BackArrow";
+import { PageContainer } from "../layouts";
 import { ArrowLeft } from "phosphor-react";
 
 const ConsentView = styled.div`
