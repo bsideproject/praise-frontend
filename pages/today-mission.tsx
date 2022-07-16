@@ -3,7 +3,6 @@ import { Bell } from "phosphor-react";
 import styled, { useTheme } from "styled-components";
 import { Header, StickyHeader } from "../components/Header";
 import DefaultLayout from "../layouts";
-import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
 import BellImage from "../public/icon/Bell.svg";
@@ -11,10 +10,8 @@ import PageOverlay from "../components/PageOverlay";
 import Modal from "../components/Modal";
 import NotificationSection from "../components/NotificationSection";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import MissionCheckModalContent from "../components/MissionCheckModalContent";
-
-const BACKEND_URL = "http://118.67.128.237";
+import getDailyMission from "../apis/getDailyMission";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -22,13 +19,6 @@ const Title = styled.div`
 	font-weight: 500;
 	color: ${(props) => props.theme.colors.white};
 `;
-
-const _Bell = styled(Bell)`
-	filter: drop-shadow(0px 0px 3px white);
-	> path {
-		fill: ${props => props.theme.colors.secondary10};
-	}
-`
 
 const Content = styled.section`
 	padding: 32px 21px;
@@ -134,33 +124,15 @@ const MOCK_NOTIFICATIONS = [
 	{ title: "hello", text: "world", createdAt: new Date() },
 ];
 
-const dummyMission = {
-	"mission": {
-		"title": "비밀봉지 쓰지않기",
-		"type": "Mountain",
-		"description": "우리가 일회용으로 받는 비닐봉지는 사실 37회를 사용해야하지만 지구에 건강하다고 해요. 오늘 하루는 비닐봉지를 안 받아보는 건 어때요? 👀",
-	},
-	"missionProgress": {
-		"id": 1,
-		"proofImageUrl": "",
-		"isCompleted": false,
-		"createdAt": "",
-	},
-	"daysOfProgress": 12,
-}
-
 
 function MyPage() {
 	const theme = useTheme();
 	const [ showNotification, setShowNotification ] = useState(false);
 	const [ showMissionModal, setShowMissionModal ] = useState(false);
 	const [ imageSrc, setImageSrc ] = useState("");
-	// const [ showMissionModal, setShowMissionModal ] = useState(true);
-	// const [ imageSrc, setImageSrc ] = useState("/image/today/Mountain-completed.svg");
 	const [ mission, setMission ] = useState<{ mission?: any, missionProgress?: any, daysOfProgress?: any}>({});
 	const [ remainingTime, setRemainingTime ] = useState("");
 	const [ iconPath, setIconPath ] = useState("/image/today/defaultIcon.svg");
-	;
 
 	function updateRemainingTime() {
 		const remainingTime = moment().endOf("day").diff(moment());
@@ -189,30 +161,12 @@ function MyPage() {
 			window.addEventListener("message", listener);
 		}
 
-		axios
-			.get(`${BACKEND_URL}/apis/daily-mission-progress`)
-			.then((response) => {
-				const mission = response.data;
-				setMission(mission);
-				setIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
-			})
-			.catch((err) => {
-				const { error } = err.response.data;
-				if(error.code === "E3000") {
-					axios
-					.post(`${BACKEND_URL}/apis/mission-progress`)
-					.then((data) => {
-						axios
-							.get(`${BACKEND_URL}/apis/daily-mission-progress`)
-							.then((response) => {
-								const mission = response.data;
-								setMission(mission);
-								setIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
-							})
-					})
-				}
-			})
-		// setMission(dummyMission);
+		const callbackFn = (mission: any) => {
+			setMission(mission);
+			setIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
+		};
+
+		getDailyMission(callbackFn);
 
 		return () => {
 			if (window.ReactNativeWebView) {
