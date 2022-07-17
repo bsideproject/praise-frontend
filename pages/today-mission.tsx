@@ -21,11 +21,11 @@ const Title = styled.div`
 `;
 
 const Content = styled.section`
-	padding: 32px 21px;
-	padding-bottom: 0px;
+	padding: 0px 21px;
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+	justify-content: center;
 `;
 
 const Tooltip = styled.div`
@@ -129,12 +129,12 @@ function MyPage() {
 	const theme = useTheme();
 	const [ showNotification, setShowNotification ] = useState(false);
 	const [ showMissionModal, setShowMissionModal ] = useState(false);
-	const [ imageSrc, setImageSrc ] = useState("");
+	const [ encodedImage, setEncodedImage ] = useState("");
 	const [ mission, setMission ] = useState<{ mission?: any, missionProgress?: any, daysOfProgress?: any}>({});
 	const [ remainingTime, setRemainingTime ] = useState("");
-	const [ iconPath, setIconPath ] = useState("/image/today/defaultIcon.svg");
+	const [ missionIconPath, setMissionIconPath ] = useState("/image/today/defaultIcon.svg");
 
-	function updateRemainingTime() {
+	const updateRemainingTime = () => {
 		const remainingTime = moment().endOf("day").diff(moment());
 		const duration = moment.duration(remainingTime);
 		const hours = duration.hours().toString().padStart(2, '0');
@@ -142,15 +142,19 @@ function MyPage() {
 		const formatted = `${hours}:${minutes}`; 
 		setRemainingTime(formatted);
 	}
+
+	const onBackMissionModal= () => {
+		setShowMissionModal(false);
+		setEncodedImage("");
+	}
 	
 	useEffect(() => {
 		updateRemainingTime();
 		setInterval(updateRemainingTime, 1000);
 
-		function listener(event: any) {
+		const listener = (event: any) => {
 			const { file } = JSON.parse(event.data);
-			console.log(file.base64);
-			setImageSrc(`data:image/jpg;base64,${file.base64}`);
+			setEncodedImage(file.base64);
 			setShowMissionModal(true);
 		};
 
@@ -163,7 +167,7 @@ function MyPage() {
 
 		const callbackFn = (mission: any) => {
 			setMission(mission);
-			setIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
+			setMissionIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
 		};
 
 		getDailyMission(callbackFn);
@@ -176,7 +180,7 @@ function MyPage() {
 		}
 	}, []);
 
-	const sendCameraRequest = () => {
+	const sendCaptureRequest = () => {
 		if (window.ReactNativeWebView) {
 			window.ReactNativeWebView.postMessage(JSON.stringify({ type: "REQ_CAMERA_PERMISSION"}));
 		} else {
@@ -200,7 +204,7 @@ function MyPage() {
 				{mission.mission && <Tooltip>
 					<span className="message">{mission.mission.description}</span>
 				</Tooltip>}
-				{mission.mission && <Mission onClick={sendCameraRequest}>
+				{mission.mission && <Mission onClick={sendCaptureRequest}>
 					<div className="mission-header">
 						<div className="mission-tag">
 							<span>#{mission.daysOfProgress} 미션</span>
@@ -215,8 +219,8 @@ function MyPage() {
 						<Image
 							height={173}
 							width={173}
-							src={iconPath}
-							onError={() => setIconPath("/image/today/defaultIcon.svg")}
+							src={missionIconPath}
+							onError={() => setMissionIconPath("/image/today/defaultIcon.svg")}
 							alt={"icon of Mission"}
 							className="mission-icon"
 						/>
@@ -227,10 +231,16 @@ function MyPage() {
 			<PageOverlay title="알림" onBack={() => setShowNotification(false)} show={showNotification}>
 				<NotificationSection notifications={MOCK_NOTIFICATIONS} />
 			</PageOverlay>
-			{imageSrc && 
-				<Modal title="인증 사진" onBack={() => setShowMissionModal(false)} show={showMissionModal}>
+			{mission?.missionProgress?.id && encodedImage && 
+				<Modal title="인증 사진" 
+					onBack={onBackMissionModal} 
+					show={showMissionModal}
+				>
 					<MissionCheckModalContent
-						imageSrc={imageSrc}
+						missionProgressId={mission.missionProgress.id}
+						encodedImage={encodedImage}
+						sendCaptureRequest={sendCaptureRequest}
+						setShowMissionModal={setShowMissionModal}
 					/>
 				</Modal>
 			}

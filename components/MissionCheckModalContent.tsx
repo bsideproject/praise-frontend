@@ -1,12 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { Smiley, SmileyMeh, SmileyXEyes } from "phosphor-react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import Button from "./Button";
 import MissionEvaluationItem from "./MissionEvalutionItem";
+import checkDailyMission from "../apis/checkDailyMission";
 
 interface MissionCardProps {
-	imageSrc: string;
+	missionProgressId: number,
+	encodedImage: string;
+	sendCaptureRequest: MouseEventHandler<HTMLButtonElement>;
+	setShowMissionModal: Function;
 }
 
 const Content = styled.div`
@@ -51,7 +55,6 @@ const Content = styled.div`
 			line-height: 24px;
 			height: auto;
 			font-weight: 400;
-			background: ${props => props.theme.colors.secondary20};
 
 			&:first-of-type {
 				margin-right: 12px;
@@ -62,14 +65,21 @@ const Content = styled.div`
 
 
 
-function MissionCheckModalContent({ imageSrc }: MissionCardProps) {
-	const [ evaluation, setEvaluation ] = useState<"EASY" | "NORMAL" | "HARD" | undefined>();
+function MissionCheckModalContent({ missionProgressId, encodedImage, sendCaptureRequest, setShowMissionModal }: MissionCardProps) {
+	const [ evaluation, setEvaluation ] = useState<"EASY" | "NORMAL" | "HARD">("NORMAL");
+	const theme = useTheme();
+
+	const sendMissionCheck = () => {
+		checkDailyMission(missionProgressId, encodedImage, evaluation)
+		setShowMissionModal(false);
+	}
+
 	return (
 		<Content>
 			<img
-				width={"260px"}	
-				height={"260px"}
-				src={imageSrc}
+				width={"256px"}	
+				height={"256px"}
+				src={`data:image/jpeg;base64,${encodedImage}`}
 				alt={"image of Mission"}
 			/>
 			<div className="mission-survey">오늘 미션은 어떠셨나요?</div>
@@ -112,8 +122,8 @@ function MissionCheckModalContent({ imageSrc }: MissionCardProps) {
 				/>
 			</div>
 			<div className="mission-actions">
-				<Button>재촬영</Button>
-				<Button>인증 완료</Button>
+				<Button onClick={sendCaptureRequest} background={theme.colors.gray40}>재촬영</Button>
+				<Button onClick={sendMissionCheck} background={theme.colors.secondary20}>인증 완료</Button>
 			</div>
 		</Content>
 	);
