@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, ReactNode, useState } from "react";
 import { Smiley, SmileyMeh, SmileyXEyes } from "phosphor-react";
 import styled, { useTheme } from "styled-components";
 import Button from "./Button";
@@ -86,6 +86,20 @@ function MissionCheckModalContent({ missionProgressId, encodedImage, sendCapture
 		}
 	}
 
+	const difficuties: { difficulty: "EASY" | "NORMAL" | "HARD", icon: ReactNode }[] = [
+		{
+			difficulty: "EASY",
+			icon: <Smiley alt="EASY Icon" size={40} weight="light"/>,
+		},
+		{
+			difficulty: "NORMAL",
+			icon: <SmileyMeh alt="NORMAL Icon" size={40} weight="light"/>,
+		},{
+			difficulty: "HARD",
+			icon: <SmileyXEyes alt="HARD Icon" size={40} weight="light"/>,
+		},
+	];
+
 	return (
 		<Content>
 			<img
@@ -96,42 +110,15 @@ function MissionCheckModalContent({ missionProgressId, encodedImage, sendCapture
 			/>
 			<div className="mission-survey">오늘 미션은 어떠셨나요?</div>
 			<div className="mission-evaluation">
-				<MissionEvaluationItem 
-					icon={
-						<Smiley
-							alt="EASY Icon"
-							size={40}
-							weight="light"
-						/>
-					}
-					difficulty="EASY"
-					evaluation={evaluation}
-					setEvaluation={setEvaluation}
-				/>
-				<MissionEvaluationItem 
-					icon={
-						<SmileyMeh
-							alt="Normal Icon"
-							size={40}
-							weight="light"
-						/>
-					}
-					difficulty="NORMAL"
-					evaluation={evaluation}
-					setEvaluation={setEvaluation}
-				/>
-				<MissionEvaluationItem 
-					icon={
-						<SmileyXEyes
-							alt="Hard Icon"
-							size={40}
-							weight="light"
-						/>
-					}
-					difficulty="HARD"
-					evaluation={evaluation}
-					setEvaluation={setEvaluation}
-				/>
+				{difficuties.map(difficulty => (
+					<MissionEvaluationItem 
+						key={difficulty.difficulty}
+						icon={difficulty.icon}
+						difficulty={difficulty.difficulty}
+						evaluation={evaluation}
+						setEvaluation={setEvaluation}
+					/>
+				))}
 			</div>
 			<div className="mission-actions">
 				<Button onClick={sendCaptureRequest} background={theme.colors.gray40}>재촬영</Button>
