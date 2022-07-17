@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MissionCard, { MissionType } from "./mission-card";
+import MissionCard, { MissionType } from "./MissionCard";
 
 const SectionContainer = styled.section`
 	padding: 24px 16px 24px 16px;
