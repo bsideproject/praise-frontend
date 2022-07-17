@@ -185,6 +185,7 @@ function MyPage() {
 
 	const sendCaptureRequest = () => {
 		if (window.ReactNativeWebView) {
+			if(mission.missionProgress.isCompleted) return;
 			window.ReactNativeWebView.postMessage(JSON.stringify({ type: "REQ_CAMERA_PERMISSION"}));
 		} else {
 			alert("모바일 환경이 아닙니다.");
@@ -227,7 +228,12 @@ function MyPage() {
 							alt={"icon of Mission"}
 							className="mission-icon"
 						/>
-						<div className="mission-upload-button">미션 인증하기</div>
+						<div className="mission-upload-button">
+							{mission.missionProgress.isCompleted 
+								? `${mission.daysOfProgress}일차 미션을 기다려주세요`
+								: "미션 인증하기"
+							}
+						</div>
 					</div>
 				</Mission>}
 			</Content>
