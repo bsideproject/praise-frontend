@@ -6,7 +6,7 @@ interface checkDailyMissionProps {
 	(missionProgressId: number, encodedImage: string, evaluation: "EASY" | "NORMAL" | "HARD"): void
 }
 
-const checkDailyMission: checkDailyMissionProps = (missionProgressId, encodedImage, evaluation) => {
+const checkDailyMission: checkDailyMissionProps = (missionProgressId, encodedImage, evaluation) => 
 	axios
 		.put(`${BACKEND_URL}/apis/mission-progress/${missionProgressId}`, {
 			proofImageUrl: encodedImage,
@@ -24,6 +24,5 @@ const checkDailyMission: checkDailyMissionProps = (missionProgressId, encodedIma
 			const { error } = err.response.data;
 			alert(error.message)
 		})
-};
 
 export default checkDailyMission;

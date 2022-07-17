@@ -5,12 +5,14 @@ import styled, { useTheme } from "styled-components";
 import Button from "./Button";
 import MissionEvaluationItem from "./MissionEvalutionItem";
 import checkDailyMission from "../apis/checkDailyMission";
+import checkNewRewords from "../apis/checkNewRewords";
 
 interface MissionCardProps {
 	missionProgressId: number,
 	encodedImage: string;
 	sendCaptureRequest: MouseEventHandler<HTMLButtonElement>;
 	setShowMissionModal: Function;
+	setShowRewardModal: Function;
 }
 
 const Content = styled.div`
@@ -65,13 +67,23 @@ const Content = styled.div`
 
 
 
-function MissionCheckModalContent({ missionProgressId, encodedImage, sendCaptureRequest, setShowMissionModal }: MissionCardProps) {
+function MissionCheckModalContent({ missionProgressId, encodedImage, sendCaptureRequest, setShowMissionModal, setShowRewardModal }: MissionCardProps) {
 	const [ evaluation, setEvaluation ] = useState<"EASY" | "NORMAL" | "HARD">("NORMAL");
 	const theme = useTheme();
 
-	const sendMissionCheck = () => {
-		checkDailyMission(missionProgressId, encodedImage, evaluation)
-		setShowMissionModal(false);
+	const sendMissionCheck = async () => {
+		try {
+			await checkDailyMission(missionProgressId, encodedImage, evaluation);
+			// const { data } = await checkNewRewords();
+			// if(data.length > 0) {
+			// 	setShowRewardModal(true);
+			// }
+		} catch(e) {
+
+		} finally {
+			setShowRewardModal(true);
+			setShowMissionModal(false);
+		}
 	}
 
 	return (

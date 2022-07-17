@@ -12,6 +12,7 @@ import NotificationSection from "../components/NotificationSection";
 import { useEffect, useState } from "react";
 import MissionCheckModalContent from "../components/MissionCheckModalContent";
 import getDailyMission from "../apis/getDailyMission";
+import RewardModalContent from "../components/RewardModalContent";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -129,6 +130,8 @@ function MyPage() {
 	const theme = useTheme();
 	const [ showNotification, setShowNotification ] = useState(false);
 	const [ showMissionModal, setShowMissionModal ] = useState(false);
+	const [ showRewardModal, setShowRewardModal ] = useState(false);
+	
 	const [ encodedImage, setEncodedImage ] = useState("");
 	const [ mission, setMission ] = useState<{ mission?: any, missionProgress?: any, daysOfProgress?: any}>({});
 	const [ remainingTime, setRemainingTime ] = useState("");
@@ -241,9 +244,17 @@ function MyPage() {
 						encodedImage={encodedImage}
 						sendCaptureRequest={sendCaptureRequest}
 						setShowMissionModal={setShowMissionModal}
+						setShowRewardModal={setShowRewardModal}
 					/>
 				</Modal>
 			}
+			<Modal 
+				title="" 
+				onBack={() => setShowRewardModal(false)}
+				show={showRewardModal}
+			>
+				<RewardModalContent />
+			</Modal>
 		</DefaultLayout>
 	);
 }
