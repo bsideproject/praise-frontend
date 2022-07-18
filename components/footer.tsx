@@ -2,10 +2,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Alarm, CalendarCheck, Smiley } from "phosphor-react";
 import Image from "next/image";
-import DailyMissionImg from "../public/icon/DailyMission.svg";
+import ActiveAlarmImg from "../public/icon/ActiveAlarm.svg";
 import CalendarCheckImg from "../public/icon/CalendarCheck.svg";
 import MyPageImg from "../public/icon/MyPage.svg";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 const FooterContainer = styled.div`
 	border-top: 1px ${({ theme }) => theme.colors.gray10} solid;
@@ -40,32 +40,35 @@ const NavigationText = styled.div`
 	line-height: 150%;
 `;
 
-const NavLinks = [
-	{
-		name: "DAILY_MISSION",
-		path: "/daily-mission",
-		text: "데일리 미션",
-		icon: <Alarm size={32} color="#323138" weight="duotone" />,
-		selectedIcon: DailyMissionImg
-	},
-	{
-		name: "MISSION_STATUS",
-		path: "/mission-status",
-		text: "미션 현황",
-		icon: <CalendarCheck size={32} color="#676570" />,
-		selectedIcon: CalendarCheckImg
-	},
-	{
-		name: "MY_PAGE",
-		path: "/my-page",
-		text: "마이 페이지",
-		icon: <Smiley size={32} color="#676570" />,
-		selectedIcon: MyPageImg
-	},
-];
+
 
 function Footer() {
 	const router = useRouter();
+	const theme = useTheme();
+
+	const NavLinks = [
+		{
+			name: "DAILY_MISSION",
+			path: "/daily-mission",
+			text: "데일리 미션",
+			icon: <Alarm size={32} color={theme.colors.gray60} />,
+			selectedIcon: ActiveAlarmImg
+		},
+		{
+			name: "MISSION_STATUS",
+			path: "/mission-status",
+			text: "미션 현황",
+			icon: <CalendarCheck size={32} color={theme.colors.gray60} />,
+			selectedIcon: CalendarCheckImg
+		},
+		{
+			name: "MY_PAGE",
+			path: "/my-page",
+			text: "마이 페이지",
+			icon: <Smiley size={32} color={theme.colors.gray60} />,
+			selectedIcon: MyPageImg
+		},
+	];
 
 	return (
 		<FooterContainer>
