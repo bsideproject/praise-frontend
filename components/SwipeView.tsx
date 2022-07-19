@@ -21,17 +21,13 @@ const messages = [
 const SplashViewWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	max-width: 375;
 	flex-grow: 1;
 	height: 100%;
 	background-color: ${(props) => props.theme.colors.gray90};
 
 	> div:first-of-type {
-		height: 100%;
-	}
-
-	.react-swipeable-view-container {
-		height: 100%;
+		display: flex;
+		flex: 1;
 	}
 
 	.splash-swipe-view {
@@ -63,7 +59,6 @@ const SplashViewWrapper = styled.div`
 	.splash-stepper {
 		display: flex;
 		justify-content: center;
-		margin-top: auto;
 	}
 
 	.splash-stepper-dot {

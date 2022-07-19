@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { ShareNetwork } from "phosphor-react";
 import styled from "styled-components";
-import { Header, StickyHeader } from "../src/components/header";
-import DefaultLayout from "../src/layouts";
+import { Header, StickyHeader } from "../components/Header";
+import DefaultLayout from "../layouts";
 import AvatarImage from "../public/avatar.svg";
 import Link from "next/link";
-import MissionStatusSection from "../src/components/mission-status-section";
+import MissionStatusSection from "../components/MissionStatusSection";
 
 const Title = styled.div`
 	font-size: 24px;

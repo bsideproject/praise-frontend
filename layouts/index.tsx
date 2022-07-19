@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 export const PageContainer = styled.div`
 	box-sizing: border-box;

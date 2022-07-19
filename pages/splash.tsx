@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import * as React from 'react';
 import Button from "../components/Button";
 import SwipeView from "../components/SwipeView";
-import { PageContainer } from "../src/layouts";
+import { PageContainer } from "../layouts";
 
 
 const SplashPage: NextPage = () => {
