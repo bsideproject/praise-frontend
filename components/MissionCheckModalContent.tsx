@@ -74,14 +74,11 @@ function MissionCheckModalContent({ missionProgressId, encodedImage, sendCapture
 	const sendMissionCheck = async () => {
 		try {
 			await checkDailyMission(missionProgressId, encodedImage, evaluation);
-			// const { data } = await checkNewRewords();
-			// if(data.length > 0) {
-			// 	setShowRewardModal(true);
-			// }
-		} catch(e) {
-
+			const data = await checkNewRewords();
+			if(data.length > 0) {
+				setShowRewardModal(true);
+			}
 		} finally {
-			setShowRewardModal(true);
 			setShowMissionModal(false);
 		}
 	}
