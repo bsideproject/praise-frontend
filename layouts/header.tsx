@@ -8,7 +8,10 @@ interface HeaderProps {
 
 const StickyHeaderContainer = styled.div`
 	height: 62px;
+	top: 0px;
 	position: sticky;
+	z-index: 10;
+	background-color: ${(props) => props.theme.colors.gray90};
 `;
 
 function StickyHeader({ children }: HeaderProps) {
@@ -24,6 +27,14 @@ const Header = styled.div`
 	padding: 0px 24px 0px 24px;
 `;
 
+const Title = styled.div`
+	display: flex;
+	font-size: 24px;
+	line-height: 1.5;
+	font-weight: 500;
+	color: ${(props) => props.theme.colors.white};
+`;
+
 const BackHeaderContainer = styled.div`
 	display: flex;
 	align-items: center;
@@ -36,14 +47,10 @@ const BackHeaderContainer = styled.div`
 		position: absolute;
 		left: 16px;
 	}
-`;
 
-const Title = styled.div`
-	display: flex;
-	font-size: 24px;
-	line-height: 150%;
-	font-weight: 500;
-	color: ${(props) => props.theme.colors.white};
+	${Title} {
+		font-size: 20px;
+	}
 `;
 
 const BackHeader = (props: { title: string, onBack: MouseEventHandler<SVGSVGElement> }) => {
