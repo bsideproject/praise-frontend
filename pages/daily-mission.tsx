@@ -200,10 +200,10 @@ function MyPage() {
 			<StickyHeader>
 				<Header>
 					<Title>오늘의 미션</Title>
-					<Image
+					{/* <Image
 						src={BellImage}
 						alt="bell Image"
-					/>
+					/> */}
 				</Header>
 			</StickyHeader>
 			<Content>
@@ -239,9 +239,9 @@ function MyPage() {
 					</div>
 				</Mission>}
 			</Content>
-			<PageOverlay title="알림" onBack={() => setShowNotification(false)} show={showNotification}>
+			{/* <PageOverlay title="알림" onBack={() => setShowNotification(false)} show={showNotification}>
 				<NotificationSection notifications={MOCK_NOTIFICATIONS} />
-			</PageOverlay>
+			</PageOverlay> */}
 			{mission?.missionProgress?.id && encodedImage && 
 				<Modal title="인증 사진" 
 					onBack={onBackMissionModal} 
