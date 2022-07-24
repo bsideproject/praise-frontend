@@ -10,10 +10,10 @@ import PageOverlay from "../components/PageOverlay";
 import Modal from "../components/Modal";
 import NotificationSection from "../components/NotificationSection";
 import { useEffect, useState } from "react";
-import MissionCheckModalContent from "../components/MissionCheckModalContent";
+import MissionCheckModalContent from "../components/daily-mission/MissionCheckModalContent";
 import getDailyMission from "../apis/getDailyMission";
 import RewardModalContent from "../components/RewardModalContent";
-import MyRewardsSection from "../components/MyRewardsSection";
+import MyRewardsSection from "../components/my-rewards/MyRewardsSection";
 import isLoggedIn from "../hooks/isLoggedIn";
 
 const Title = styled.div`

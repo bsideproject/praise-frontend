@@ -1,6 +1,6 @@
 import { BackHeader, StickyHeader } from "../layouts/header";
 import { PageContainer } from "../layouts";
-import MyRewardsSection from "../components/MyRewardsSection";
+import MyRewardsSection from "../components/my-rewards/MyRewardsSection";
 import { useRouter } from "next/router";
 import isLoggedIn from "../hooks/isLoggedIn";
 

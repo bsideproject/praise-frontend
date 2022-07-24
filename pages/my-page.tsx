@@ -5,7 +5,7 @@ import { Header, StickyHeader } from "../layouts/header";
 import DefaultLayout from "../layouts";
 import AvatarImage from "../public/avatar.svg";
 import Link from "next/link";
-import MissionStatusSection from "../components/MissionStatusSection";
+import MissionStatusSection from "../components/my-page/MissionStatusSection";
 import isLoggedIn from "../hooks/isLoggedIn";
 import { useEffect, useState } from "react";
 import getMyRewards from "../apis/getMyRewards";

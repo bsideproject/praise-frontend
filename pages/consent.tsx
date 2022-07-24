@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 import { useState } from "react";
 import Button from "../components/Button";
 import isLoggedIn from "../hooks/isLoggedIn";
-import CheckboxMessage from "../components/CheckboxMessage";
+import CheckboxMessage from "../components/consent/CheckboxMessage";
 import { PageContainer } from "../layouts";
 import { ArrowLeft } from "phosphor-react";
 

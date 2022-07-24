@@ -2,10 +2,10 @@
 import { MouseEventHandler, ReactNode, useState } from "react";
 import { Smiley, SmileyMeh, SmileyXEyes } from "phosphor-react";
 import styled, { useTheme } from "styled-components";
-import Button from "./Button";
+import Button from "../Button";
 import MissionEvaluationItem from "./MissionEvalutionItem";
-import checkDailyMission from "../apis/checkDailyMission";
-import checkNewRewords from "../apis/checkNewRewords";
+import checkDailyMission from "../../apis/checkDailyMission";
+import checkNewRewords from "../../apis/checkNewRewords";
 
 interface MissionCardProps {
 	missionProgressId: number,
