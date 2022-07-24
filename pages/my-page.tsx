@@ -7,6 +7,8 @@ import AvatarImage from "../public/avatar.svg";
 import Link from "next/link";
 import MissionStatusSection from "../components/MissionStatusSection";
 import isLoggedIn from "../hooks/isLoggedIn";
+import { useEffect, useState } from "react";
+import getMyRewards from "../apis/getMyRewards";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -50,7 +52,15 @@ const MyRewardSection = styled.section`
 
 function MyPage() {
 	isLoggedIn();
-	const state = "2";
+	//apis/users/achieved-rewards
+	const [ state, setState ] = useState(0);
+
+	useEffect(() => {
+		getMyRewards((data) => {
+			const lastRewardState = data.reduce((a, b) => a.id > b.id ? a : b)
+			setState(lastRewardState.id);
+		});
+	}, []);
 	
 	return (
 		<DefaultLayout>
@@ -71,7 +81,7 @@ function MyPage() {
 				<Link href="/completed">참여한 인증 보기</Link>
 			</JoinedMissionSection>
 			<MyRewardSection>
-				<Link href={`my-rewards?state=${state}`}>내 리워드 보기</Link>
+				<Link href={`my-rewards?state=${state ?? 1}`}>내 리워드 보기</Link>
 			</MyRewardSection>
 		</DefaultLayout>
 	);
