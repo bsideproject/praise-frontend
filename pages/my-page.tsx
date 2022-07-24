@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ShareNetwork } from "phosphor-react";
 import styled from "styled-components";
-import { Header, StickyHeader } from "../components/Header";
+import { Header, StickyHeader } from "../layouts/header";
 import DefaultLayout from "../layouts";
 import AvatarImage from "../public/avatar.svg";
 import Link from "next/link";
@@ -16,8 +16,7 @@ const Title = styled.div`
 `;
 
 const AvatarSection = styled.section`
-	padding-top: 24px;
-	padding-bottom: 24px;
+	padding: 24px 16px;
 	display: flex;
 	column-gap: 13px;
 	align-items: center;
@@ -51,6 +50,7 @@ const MyRewardSection = styled.section`
 
 function MyPage() {
 	isLoggedIn();
+	const state = "2";
 	
 	return (
 		<DefaultLayout>
@@ -71,7 +71,7 @@ function MyPage() {
 				<Link href="/completed">참여한 인증 보기</Link>
 			</JoinedMissionSection>
 			<MyRewardSection>
-				<Link href="my-reward">내 리워드 보기</Link>
+				<Link href={`my-rewards?state=${state}`}>내 리워드 보기</Link>
 			</MyRewardSection>
 		</DefaultLayout>
 	);

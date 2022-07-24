@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Bell } from "phosphor-react";
 import styled, { useTheme } from "styled-components";
-import { Header, StickyHeader } from "../components/Header";
+import { Header, StickyHeader } from "../layouts/header";
 import DefaultLayout from "../layouts";
 import Image from "next/image";
 import moment from "moment";
