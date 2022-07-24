@@ -1,31 +1,21 @@
-import styled from "styled-components";
-import { Header, StickyHeader } from "../components/Header";
+import { BackHeader, StickyHeader } from "../layouts/header";
 import { PageContainer } from "../layouts";
 import MyRewardsSection from "../components/MyRewardsSection";
 import { useRouter } from "next/router";
 import isLoggedIn from "../hooks/isLoggedIn";
-
-const Title = styled.div`
-	font-size: 24px;
-	line-height: 150%;
-	font-weight: 500;
-	color: ${(props) => props.theme.colors.white};
-`;
 
 function MyRewards() {
 	isLoggedIn();
 	const router = useRouter();
 	const { animate, state } = router.query
 
-	console.log(animate);
-	console.log(state);
-
 	return (
 		<PageContainer>
 			<StickyHeader>
-				<Header>
-					<Title>내 리워드 보기</Title>
-				</Header>
+				<BackHeader
+					title="내 리워드 보기"
+					onBack={() => history.back()}
+				/>
 			</StickyHeader>
 			<MyRewardsSection animate={parseInt(animate)} state={parseInt(state)} />
 		</PageContainer>
