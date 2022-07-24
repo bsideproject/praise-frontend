@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MissionCard, { MissionType } from "./MissionCard";
+import MissionCard, { MissionStatusType } from "./MissionStatusCard";
 
 const SectionContainer = styled.section`
 	padding: 24px 16px 24px 16px;
@@ -29,7 +29,7 @@ interface MissionStatusSectionProps {
 
 function MissionStatusSection(props: MissionStatusSectionProps) {
 
-	const MissionLinks: { name: MissionType; text: string, count: number }[] =
+	const MissionLinks: { name: MissionStatusType; text: string, count: number }[] =
 	[
 		{
 			name: "COMPLETED",

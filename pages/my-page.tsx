@@ -83,7 +83,7 @@ function MyPage() {
 				{...myInfo?.missionState}
 			/>
 			<JoinedMissionSection>
-				<Link href="/completed">참여한 인증 보기</Link>
+				<Link href="/complete-missions">참여한 인증 보기</Link>
 			</JoinedMissionSection>
 			<MyRewardSection>
 				<Link href={`my-rewards?state=${state ?? 1}`}>내 리워드 보기</Link>

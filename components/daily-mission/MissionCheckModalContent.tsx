@@ -88,14 +88,14 @@ function MissionCheckModalContent({ missionProgressId, encodedImage, sendCapture
 	const difficuties: { difficulty: "EASY" | "NORMAL" | "HARD", icon: ReactNode }[] = [
 		{
 			difficulty: "EASY",
-			icon: <Smiley alt="EASY Icon" size={40} weight="light"/>,
+			icon: <Smiley alt="EASY Icon" size={40} weight="light" color={theme.colors.gray90}/>,
 		},
 		{
 			difficulty: "NORMAL",
-			icon: <SmileyMeh alt="NORMAL Icon" size={40} weight="light"/>,
+			icon: <SmileyMeh alt="NORMAL Icon" size={40} weight="light" color={theme.colors.gray90}/>,
 		},{
 			difficulty: "HARD",
-			icon: <SmileyXEyes alt="HARD Icon" size={40} weight="light"/>,
+			icon: <SmileyXEyes alt="HARD Icon" size={40} weight="light" color={theme.colors.gray90}/>,
 		},
 	];
 
