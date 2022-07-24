@@ -13,6 +13,7 @@ interface MissionCardProps {
 	sendCaptureRequest: MouseEventHandler<HTMLButtonElement>;
 	setShowMissionModal: Function;
 	setRewardId: Function;
+	onSuccess: Function
 }
 
 const Content = styled.div`
@@ -67,16 +68,17 @@ const Content = styled.div`
 
 
 
-function MissionCheckModalContent({ missionProgressId, encodedImage, sendCaptureRequest, setShowMissionModal, setRewardId }: MissionCardProps) {
+function MissionCheckModalContent({ missionProgressId, encodedImage, sendCaptureRequest, setShowMissionModal, setRewardId, onSuccess }: MissionCardProps) {
 	const [ evaluation, setEvaluation ] = useState<"EASY" | "NORMAL" | "HARD">("NORMAL");
 	const theme = useTheme();
 
 	const sendMissionCheck = async () => {
 		try {
 			await checkDailyMission(missionProgressId, encodedImage, evaluation);
+			onSuccess();
 			const data = await checkNewRewords();
-			if(data.length > 0) {
-				setRewardId(data[0].achievedRewardId);
+			if(data?.length > 0) {
+				setRewardId(data[0]?.achievedRewardId ?? 0);
 			}
 		} finally {
 			setShowMissionModal(false);

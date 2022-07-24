@@ -153,6 +153,11 @@ function MyPage() {
 		setShowMissionModal(false);
 		setEncodedImage("");
 	}
+
+	const getMissionCallback = (mission: any) => {
+		setMission(mission);
+		setMissionIconPath(`/image/today/${mission.mission.category.toLowerCase()}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
+	};
 	
 	useEffect(() => {
 		updateRemainingTime();
@@ -171,12 +176,7 @@ function MyPage() {
 			window.addEventListener("message", listener);
 		}
 
-		const callbackFn = (mission: any) => {
-			setMission(mission);
-			setMissionIconPath(`/image/today/${mission.mission.category}-${mission.missionProgress.isCompleted ? "completed" : "progress"}.svg`);
-		};
-
-		getDailyMission(callbackFn);
+		getDailyMission(getMissionCallback);
 
 		return () => {
 			if (window.ReactNativeWebView) {
@@ -252,6 +252,7 @@ function MyPage() {
 						encodedImage={encodedImage}
 						sendCaptureRequest={sendCaptureRequest}
 						setShowMissionModal={setShowMissionModal}
+						onSuccess={() => getDailyMission(getMissionCallback)}
 						setRewardId={setRewardId}
 					/>
 				</Modal>
