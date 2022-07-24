@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Calendar, CalendarCheck, CalendarX } from "phosphor-react";
 import { ReactNode } from "react";
 import styled from "styled-components";
@@ -9,7 +8,6 @@ interface MissionCardProps {
 	type: MissionType;
 	text: string;
 	number: number;
-	queryParams: string;
 }
 
 const Text = styled.div`
@@ -54,20 +52,18 @@ const MissionIcon: Record<MissionType, ReactNode> = {
 	UNCOMPLETED: <CalendarX size={28} />,
 };
 
-function MissionCard({ type, number, text, queryParams }: MissionCardProps) {
+function MissionCard({ type, number, text }: MissionCardProps) {
 	return (
 		<MissionCardContainer>
-			<Link href={{ pathname: "/missions", query: { status: queryParams } }}>
-				<ItemContainer>
-					{MissionIcon[type]}
-					<TextContainer>
-						<Text>{text}</Text>
-						<Text>
-							<StrongText>{number}</StrongText>개
-						</Text>
-					</TextContainer>
-				</ItemContainer>
-			</Link>
+			<ItemContainer>
+				{MissionIcon[type]}
+				<TextContainer>
+					<Text>{text}</Text>
+					<Text>
+						<StrongText>{number}</StrongText>개
+					</Text>
+				</TextContainer>
+			</ItemContainer>
 		</MissionCardContainer>
 	);
 }

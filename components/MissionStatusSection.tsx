@@ -21,26 +21,33 @@ const SectionTitle = styled.div`
 	color: ${(props) => props.theme.colors.white};
 `;
 
-const MissionLinks: { name: MissionType; queryParams: string; text: string }[] =
+interface MissionStatusSectionProps {
+	completedMissionsCount: number,
+	leftMissionsCount: number,
+	achievedRewardsCount: number
+} 
+
+function MissionStatusSection(props: MissionStatusSectionProps) {
+
+	const MissionLinks: { name: MissionType; text: string, count: number }[] =
 	[
 		{
-			name: "TOTAL",
-			queryParams: "all",
-			text: "총 미션",
-		},
-		{
 			name: "COMPLETED",
-			queryParams: "completed",
 			text: "완료 미션",
+			count: props.completedMissionsCount,
 		},
 		{
 			name: "UNCOMPLETED",
-			queryParams: "uncompleted",
 			text: "미완료 미션",
+			count: props.leftMissionsCount,
+		},
+		{
+			name: "TOTAL",
+			text: "총 미션",
+			count: props.achievedRewardsCount,
 		},
 	];
 
-function MissionStatusSection() {
 	return (
 		<SectionContainer>
 			<SectionTitle>미션 현황</SectionTitle>
@@ -50,8 +57,7 @@ function MissionStatusSection() {
 						key={missionLink.name}
 						type={missionLink.name}
 						text={missionLink.text}
-						queryParams={missionLink.queryParams}
-						number={10}
+						number={missionLink.count}
 					/>
 				))}
 			</MissionCardContainer>
