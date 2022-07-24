@@ -6,6 +6,7 @@ import DefaultLayout from "../layouts";
 import AvatarImage from "../public/avatar.svg";
 import Link from "next/link";
 import MissionStatusSection from "../components/MissionStatusSection";
+import isLoggedIn from "../hooks/isLoggedIn";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -49,6 +50,8 @@ const MyRewardSection = styled.section`
 `;
 
 function MyPage() {
+	isLoggedIn();
+	
 	return (
 		<DefaultLayout>
 			<StickyHeader>

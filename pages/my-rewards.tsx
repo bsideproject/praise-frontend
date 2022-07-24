@@ -3,6 +3,7 @@ import { Header, StickyHeader } from "../components/Header";
 import { PageContainer } from "../layouts";
 import MyRewardsSection from "../components/MyRewardsSection";
 import { useRouter } from "next/router";
+import isLoggedIn from "../hooks/isLoggedIn";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -12,6 +13,7 @@ const Title = styled.div`
 `;
 
 function MyRewards() {
+	isLoggedIn();
 	const router = useRouter();
 	const { animate, state } = router.query
 

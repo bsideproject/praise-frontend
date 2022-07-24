@@ -133,7 +133,6 @@ function MyPage() {
 	isLoggedIn();
 	const [ showNotification, setShowNotification ] = useState(false);
 	const [ showMissionModal, setShowMissionModal ] = useState(false);
-	const [ showRewardPageOverlay, setShowRewardPageOverlay ] = useState(false);
 	const [ rewardId, setRewardId ] = useState(0);
 	
 	const [ encodedImage, setEncodedImage ] = useState("");
@@ -262,7 +261,9 @@ function MyPage() {
 				onBack={() => setRewardId(0)}
 				show={rewardId > 0}
 			>
-				<RewardModalContent />
+				<RewardModalContent 
+					rewardId={rewardId}
+				/>
 			</Modal>
 		</DefaultLayout>
 	);
