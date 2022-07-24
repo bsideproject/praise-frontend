@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import MissionCheckModalContent from "../components/MissionCheckModalContent";
 import getDailyMission from "../apis/getDailyMission";
 import RewardModalContent from "../components/RewardModalContent";
+import MyRewardsSection from "../components/MyRewardsSection";
+import isLoggedIn from "../hooks/isLoggedIn";
 
 const Title = styled.div`
 	font-size: 24px;
@@ -128,9 +130,11 @@ const MOCK_NOTIFICATIONS = [
 
 function MyPage() {
 	const theme = useTheme();
+	isLoggedIn();
 	const [ showNotification, setShowNotification ] = useState(false);
 	const [ showMissionModal, setShowMissionModal ] = useState(false);
-	const [ showRewardModal, setShowRewardModal ] = useState(false);
+	const [ showRewardPageOverlay, setShowRewardPageOverlay ] = useState(false);
+	const [ rewardId, setRewardId ] = useState(0);
 	
 	const [ encodedImage, setEncodedImage ] = useState("");
 	const [ mission, setMission ] = useState<{ mission?: any, missionProgress?: any, daysOfProgress?: any}>({});
@@ -200,7 +204,6 @@ function MyPage() {
 					<Image
 						src={BellImage}
 						alt="bell Image"
-						onClick={() => setShowNotification(true)}
 					/>
 				</Header>
 			</StickyHeader>
@@ -250,14 +253,14 @@ function MyPage() {
 						encodedImage={encodedImage}
 						sendCaptureRequest={sendCaptureRequest}
 						setShowMissionModal={setShowMissionModal}
-						setShowRewardModal={setShowRewardModal}
+						setRewardId={setRewardId}
 					/>
 				</Modal>
 			}
 			<Modal 
 				title="" 
-				onBack={() => setShowRewardModal(false)}
-				show={showRewardModal}
+				onBack={() => setRewardId(0)}
+				show={rewardId > 0}
 			>
 				<RewardModalContent />
 			</Modal>

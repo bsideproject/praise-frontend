@@ -38,7 +38,7 @@ const Content = styled.div`
     }
 `
 
-function RewardModalContent() {
+function RewardModalContent({ rewardId }: { rewardId: number }) {
     const theme = useTheme();
 
     return (
@@ -57,7 +57,7 @@ function RewardModalContent() {
             <Button 
                 color={"white"}
                 background={theme.colors.secondary20}
-                onClick={() => location.assign("/my-rewards")}
+                onClick={() => location.assign(`/my-rewards?animate=1&state=${rewardId}`)}
             >
                 리워드 받기
             </Button>

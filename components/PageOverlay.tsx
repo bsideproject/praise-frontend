@@ -4,8 +4,10 @@ import ReactDOM from "react-dom";
 import styled from "styled-components";
 
 const StyledModalBody = styled.div`
+	display: flex;
 	padding-top: 10px;
 	flex: 1 0 auto;
+	position: relative;
 `;
 
 const StyledModal = styled.div`
@@ -27,6 +29,7 @@ const StyledModalOverlay = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-family: 'Noto Sans KR', sans-serif;
 `;
 
 const Title = styled.div`
